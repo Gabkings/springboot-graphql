@@ -1,4 +1,10 @@
 type Query{
     helloWorld: String!
     greetingMessage(firstName: String!, secondName: String): String
+    message: Message
+}
+
+type Message{
+    id: ID!
+    text: String!
 }
