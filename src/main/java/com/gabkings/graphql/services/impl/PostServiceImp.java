@@ -65,4 +65,17 @@ public class PostServiceImp implements PostService {
                 .category(post.getCategory())
                 .build()).collect(Collectors.toList());
     }
+
+    @Override
+    public UUID createPost(PostDTO postDTO) {
+        Optional<Author> author = authorRepository.findById(postDTO.getAuthorId());
+        Post post = Post.builder()
+                .title(postDTO.getTitle())
+                .author(author.orElseThrow())
+                .description(postDTO.getDescription())
+                .category(postDTO.getCategory())
+                .build();
+        Post newPost = postRepository.saveAndFlush(post);
+        return newPost.getId();
+    }
 }

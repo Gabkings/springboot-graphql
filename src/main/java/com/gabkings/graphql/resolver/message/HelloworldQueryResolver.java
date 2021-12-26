@@ -1,4 +1,4 @@
-package com.gabkings.graphql.resolver;
+package com.gabkings.graphql.resolver.message;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.gabkings.graphql.dtos.MessageDTO;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,5 +30,15 @@ public class AuthorServiceImpl implements AuthorService {
                             .email(author.getEmail())
                             .build();
                 }).collect(Collectors.toList());
+    }
+
+    @Override
+    public UUID creatAuthor(AuthorDTO authorDTO) {
+        Author newAuthor = Author.builder()
+                .name(authorDTO.getName())
+                .email(authorDTO.getEmail())
+                .build();
+        Author author = authorRepository.saveAndFlush(newAuthor);
+        return author.getId();
     }
 }

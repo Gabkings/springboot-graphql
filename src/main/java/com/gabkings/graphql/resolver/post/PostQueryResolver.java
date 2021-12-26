@@ -1,7 +1,6 @@
-package com.gabkings.graphql.resolver;
+package com.gabkings.graphql.resolver.post;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.gabkings.graphql.dtos.AuthorDTO;
 import com.gabkings.graphql.dtos.PostDTO;
 import com.gabkings.graphql.models.Author;
@@ -14,12 +13,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class AuthorFieldResolver implements GraphQLResolver<AuthorDTO> {
+public class PostQueryResolver implements GraphQLQueryResolver {
+
     @Autowired
     private PostService postService;
 
-    public List<PostDTO> posts(AuthorDTO authorDTO){
-        return postService.getAllPostByAuthorId(authorDTO.getId());
-    }
 
+    public List<PostDTO> recentPosts (int count, int offset){
+//        return Collections.singletonList(PostDTO.builder()
+//                .id(UUID.randomUUID())
+//                .build());
+        return postService.getAllRecentPosts(count, offset);
+    }
 }

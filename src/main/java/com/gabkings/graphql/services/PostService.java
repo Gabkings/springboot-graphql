@@ -13,4 +13,6 @@ public interface PostService {
     AuthorDTO getAuthorById(UUID authorId) throws Exception;
 
     List<PostDTO> getAllRecentPosts(int count, int offset);
+
+    UUID createPost(PostDTO postDTO);
 }

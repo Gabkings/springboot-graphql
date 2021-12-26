@@ -1,4 +1,4 @@
-package com.gabkings.graphql.resolver;
+package com.gabkings.graphql.resolver.post;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.gabkings.graphql.dtos.AuthorDTO;
