@@ -6,21 +6,23 @@ import com.gabkings.graphql.dtos.PostDTO;
 import com.gabkings.graphql.models.Author;
 import com.gabkings.graphql.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
+@Component
 public class PostQueryResolver implements GraphQLQueryResolver {
 
     @Autowired
     private PostService postService;
 
 
-//    public List<PostDTO> posts (Author author){
-//        return Collections.singletonList(AuthorDTO.builder()
+    public List<PostDTO> recentPosts (int count, int offset){
+//        return Collections.singletonList(PostDTO.builder()
 //                .id(UUID.randomUUID())
-//                .email("gabworks51@gmail.com")
-//                .name("Gitonga")
 //                .build());
-//        return postService.getAllPostByAuthorId(author);
-//    }
+        return postService.getAllRecentPosts(count, offset);
+    }
 }

@@ -9,8 +9,11 @@ import com.gabkings.graphql.repositories.PostRepository;
 import com.gabkings.graphql.services.PostService;
 import org.checkerframework.checker.formatter.FormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,15 +31,13 @@ public class PostServiceImp implements PostService {
     @Override
     public List<PostDTO> getAllPostByAuthorId(UUID author) {
         List<Post> posts = postRepository.findByAuthor_Id(author);
-        return posts.stream().map(post -> {
-            return PostDTO.builder()
-                    .authorId(post.getAuthor().getId())
-                    .id(post.getId())
-                    .title(post.getTitle())
-                    .description(post.getDescription())
-                    .category(post.getCategory())
-                    .build();
-        }).collect(Collectors.toList());
+        return posts.stream().map(post -> PostDTO.builder()
+                .authorId(post.getAuthor().getId())
+                .id(post.getId())
+                .title(post.getTitle())
+                .description(post.getDescription())
+                .category(post.getCategory())
+                .build()).collect(Collectors.toList());
     }
 
     @Override
@@ -50,5 +51,18 @@ public class PostServiceImp implements PostService {
                 .email(author.getEmail())
                 .id(authorId)
                 .build();
+    }
+
+    @Override
+    public List<PostDTO> getAllRecentPosts(int count, int offset) {
+        PageRequest of = PageRequest.of(offset, count);
+        Page<Post> all = postRepository.findAll(of);
+        return all.stream().map(post -> PostDTO.builder()
+                .authorId(post.getAuthor().getId())
+                .id(post.getId())
+                .title(post.getTitle())
+                .description(post.getDescription())
+                .category(post.getCategory())
+                .build()).collect(Collectors.toList());
     }
 }

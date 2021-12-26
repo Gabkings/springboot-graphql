@@ -3,7 +3,7 @@ type Query{
     greetingMessage(firstName: String!, secondName: String): String
     message: Message
     authors: [Author]
-#    posts(author: Author): [Post]
+    recentPosts(count: Int!, offset: Int!): [Post]
 }
 
 type Message{
