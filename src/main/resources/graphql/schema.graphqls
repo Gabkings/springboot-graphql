@@ -3,6 +3,7 @@ type Query{
     greetingMessage(firstName: String!, secondName: String): String
     message: Message
     authors: [Author]
+#    posts(author: Author): [Post]
 }
 
 type Message{
